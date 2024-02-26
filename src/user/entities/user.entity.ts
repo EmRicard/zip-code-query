@@ -15,16 +15,16 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   firstName: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   lastName: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   password: string;
 
   @CreateDateColumn({ type: 'timestamptz' })
