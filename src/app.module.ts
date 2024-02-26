@@ -6,7 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
 
 @Module({
-  imports: [UserModule,
+  imports: [
+    UserModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -15,9 +16,9 @@ import { User } from './user/entities/user.entity';
       password: '12345',
       database: 'zip-code',
       entities: [User],
-      synchronize: true, 
+      synchronize: true,
     }),
-],
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
