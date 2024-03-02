@@ -3,11 +3,11 @@ import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService){}
+  constructor(private authService: AuthService) {}
 
-    @HttpCode(HttpStatus.OK)
-    @Post('login')
-    singIn(@Body() singInDTO: Record<string, any>){
-        return this.authService.singIn(singInDTO.username, singInDTO.password);
-    }
+  @HttpCode(HttpStatus.OK)
+  @Post('login')
+  singIn(@Body() singInDTO: Record<string, any>) {
+    return this.authService.singIn(singInDTO.email, singInDTO.password);
+  }
 }
