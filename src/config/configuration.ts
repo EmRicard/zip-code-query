@@ -9,4 +9,7 @@ export default () => ({
     synchronize: 'true' === process.env.DB_SYNCHRONIZE,
     useSSL: 'true' === process.env.DB_USE_SSL,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+  }
 });
