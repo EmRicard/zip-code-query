@@ -6,8 +6,8 @@ import { UserService } from 'src/user/user.service';
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService
-  ) { }
+    private jwtService: JwtService,
+  ) {}
 
   async singIn(email: string, pass: string): Promise<any> {
     const user = await this.userService.findOneByEmail(email);
@@ -19,7 +19,7 @@ export class AuthService {
     const payload = { sub: user.id, email: user.email };
 
     return {
-      accessToken: await this.jwtService.signAsync(payload)
-    }
+      accessToken: await this.jwtService.signAsync(payload),
+    };
   }
 }
