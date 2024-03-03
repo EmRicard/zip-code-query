@@ -10,11 +10,15 @@ import configuration from 'src/config/configuration';
 @Module({
   controllers: [AuthController],
   providers: [AuthService, UserService],
-  imports: [TypeOrmModule.forFeature([User]),
-  JwtModule.register({
-    global: true,
-    secret: configuration().jwt.secret,
-    signOptions: { expiresIn: '60s' },
-  }),]
+  imports: [
+    TypeOrmModule.forFeature([User]),
+    JwtModule.registerAsync({
+      useFactory: async () => ({
+        global: configuration().jwt.global,
+        secret: configuration().jwt.secret,
+        signOptions: configuration().jwt.signOptions,
+      }),
+    }),
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}
