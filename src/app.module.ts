@@ -10,6 +10,7 @@ import configuration from './config/configuration';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { ZipCodeApiModule } from './zip-code-api/zip-code-api.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { JwtService } from '@nestjs/jwt';
       synchronize: configuration().database.synchronize,
     }),
     AuthModule,
+    ZipCodeApiModule,
   ],
   controllers: [AppController],
   providers: [
