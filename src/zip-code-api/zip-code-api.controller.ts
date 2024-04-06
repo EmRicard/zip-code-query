@@ -7,7 +7,9 @@ export class ZipCodeApiController {
   constructor(private readonly zipCodeApiService: ZipCodeApiService) {}
 
   @Get()
-  async findAll(@Query() query: QueryZipCodeFromViaCepDto): Promise<any> {
+  async getZipCodeFromViaCep(
+    @Query() query: QueryZipCodeFromViaCepDto,
+  ): Promise<any> {
     return this.zipCodeApiService.getZipCodeFromViaCep(query);
   }
 }

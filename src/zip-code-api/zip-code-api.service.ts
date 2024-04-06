@@ -13,10 +13,7 @@ export class ZipCodeApiService {
 
   async getZipCodeFromViaCep(query: QueryZipCodeFromViaCepDto): Promise<any> {
     try {
-      const response = await this.get(
-        `https://viacep.com.br/ws/${query.zipCode}/json/`,
-      );
-      return response;
+      return await this.get(`https://viacep.com.br/ws/${query.zipCode}/json/`);
     } catch (error) {
       return { message: 'invalid zip_code' };
     }
