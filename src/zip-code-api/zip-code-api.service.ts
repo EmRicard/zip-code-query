@@ -1,23 +1,24 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { AxiosError, AxiosResponse } from 'axios';
-import { Observable, catchError, firstValueFrom, lastValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
+import { QueryZipCodeFromViaCepDto } from './dto/query-zip-code-via-cep.dto';
 
 @Injectable()
 export class ZipCodeApiService {
-  private readonly logger = new logger(ZipCodeApiService);
   constructor(private readonly httpService: HttpService) {}
 
-  async findAll(): Promise<any[]> {
-    const { data } = await firstValueFrom(
-      this.httpService
-        .get<any[]>('http://viacep.com.br/ws/01001000/json/')
-        .pipe(
-          catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw 'An error happened!';
-          }),
-        ),
+  private async get(uri: string) {
+    try {
+      return (await lastValueFrom(this.httpService.get(uri))).data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getZipCodeFromViaCep(query: QueryZipCodeFromViaCepDto): Promise<any> {
+    const response = await this.get(
+      `https://viacep.com.br/ws/${query.zipCode}/json/`,
     );
+    return response;
   }
 }
