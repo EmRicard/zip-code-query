@@ -8,14 +8,16 @@ export class ZipCodeApiService {
   private readonly logger = new logger(ZipCodeApiService);
   constructor(private readonly httpService: HttpService) {}
 
-  async findAll(): Promise<any[]>{ 
+  async findAll(): Promise<any[]> {
     const { data } = await firstValueFrom(
-      this.httpService.get<any[]>('http://viacep.com.br/ws/01001000/json/').pipe(
-        catchError((error: AxiosError) => {
-          this.logger.error(error.response.data);
-          throw 'An error happened!';
-        }),
-      ),
+      this.httpService
+        .get<any[]>('http://viacep.com.br/ws/01001000/json/')
+        .pipe(
+          catchError((error: AxiosError) => {
+            this.logger.error(error.response.data);
+            throw 'An error happened!';
+          }),
+        ),
     );
   }
 }

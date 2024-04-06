@@ -6,7 +6,7 @@ export class ZipCodeApiController {
   constructor(private readonly zipCodeApiService: ZipCodeApiService) {}
 
   @Get()
-  async findAll(): Promise<any>{
+  async findAll(): Promise<any> {
     return this.zipCodeApiService.findAll();
   }
 }
